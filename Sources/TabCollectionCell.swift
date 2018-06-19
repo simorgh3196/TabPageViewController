@@ -19,6 +19,7 @@ class TabCollectionCell: UICollectionViewCell {
     var item: String = "" {
         didSet {
             itemLabel.text = item
+            itemButton.accessibilityLabel = item
             itemLabel.invalidateIntrinsicContentSize()
             invalidateIntrinsicContentSize()
         }
@@ -36,9 +37,10 @@ class TabCollectionCell: UICollectionViewCell {
         }
     }
 
-    @IBOutlet fileprivate weak var itemLabel: UILabel!
-    @IBOutlet fileprivate weak var currentBarView: UIView!
-    @IBOutlet fileprivate weak var currentBarViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var itemLabel: UILabel!
+    @IBOutlet private weak var itemButton: UIButton!
+    @IBOutlet private weak var currentBarView: UIView!
+    @IBOutlet private weak var currentBarViewHeightConstraint: NSLayoutConstraint!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,7 +62,7 @@ class TabCollectionCell: UICollectionViewCell {
 
 extension TabCollectionCell {
 
-    override var intrinsicContentSize : CGSize {
+    override var intrinsicContentSize: CGSize {
         let width: CGFloat
         if let tabWidth = option.tabWidth , tabWidth > 0.0 {
             width = tabWidth
@@ -95,7 +97,7 @@ extension TabCollectionCell {
 
 extension TabCollectionCell {
 
-    @IBAction fileprivate func tabItemTouchUpInside(_ button: UIButton) {
+    @IBAction private func tabItemTouchUpInside(_ button: UIButton) {
         tabItemButtonPressedBlock?()
     }
 }
